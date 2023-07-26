@@ -13,6 +13,7 @@ def main():
         Try to get as close to 21 without going over.
         Face cards are worth 10.
         Aces are worth 1 or 11.
+        Blackjack pays 3 to 2.
         (H)it to take another card
         (S)tand to stop taking cars
         On your first play, you may (D)ouble down and double your bet for one single card
@@ -46,6 +47,10 @@ def main():
 
             if getHandValue(playerHand) > 21:
                 break
+
+            if len(playerHand) == 2 and getHandValue(playerHand) == 21:
+                winning = 1.5 * bet
+                blackjack = True
 
             move = getMove(playerHand, money - bet)
             
@@ -81,7 +86,10 @@ def main():
         playerValue = getHandValue(playerHand)
         dealerValue = getHandValue(dealerHand)
 
-        if dealerValue > 21:
+        if blackjack == True:
+            money += winning
+            print("Blackjack! you win {}!".format(winning))        
+        elif dealerValue > 21:
             print('Dealer busts. You win ${}!'.format(bet))
             money += bet
         elif (playerValue > 21) or (playerValue < dealerValue):
