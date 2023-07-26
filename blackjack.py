@@ -40,6 +40,8 @@ def main():
         dealerHand = [deck.pop(), deck.pop()]
         playerHand = [deck.pop(), deck.pop()]
 
+        blackjack = False
+
         print('Bet: ', bet)
         while True:
             displayHands(playerHand, dealerHand, False)
